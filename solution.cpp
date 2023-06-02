@@ -33,3 +33,24 @@ int findMaxConsecutiveOnes(vector<int>& nums) {
     }
     return max;
 }
+
+vector<int> sortedSquares(vector<int>& nums) {
+    vector<int> result(nums.size());
+    int left = 0;
+    int right = nums.size()-1;
+    int n = nums.size()-1;
+    while (left <= right) {
+        int lsquare = nums[left]*nums[left];
+        int rsquare = nums[right]*nums[right];
+        if (lsquare > rsquare) {
+            result[n] = lsquare;
+            ++left;
+        }
+        else {
+            result[n] = rsquare;
+            --right;
+        }
+        --n;
+    }
+    return result;
+}
