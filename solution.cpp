@@ -73,7 +73,28 @@ vector<int> sortedSquares(vector<int>& nums) {
     }
     return result;
 }
-
+// 1051. Height Checker
+int heightChecker(vector<int>& heights) {
+    if (heights.size() < 2) {
+        return 0;
+    }
+    vector<int> map(101, 0);
+    for (int h:heights) {
+        ++map[h];
+    }
+    int res = 0;
+    int h_ptr = 1;
+    for (int h:heights) {
+        while (map[h_ptr] == 0) {
+            ++h_ptr;
+        }
+        if (h_ptr != h) {
+            res++;
+        }
+        map[h_ptr]--;
+    }
+    return res;
+}
 // 1089. Duplicate Zeros
 void duplicateZeros(vector<int>& arr) {
     int i = 0;
@@ -93,7 +114,26 @@ void duplicateZeros(vector<int>& arr) {
 // 1299. Replace Elements with Greatest Element on Right Side
 // 1346. Check If N and Its Double Exist
 // 1381. Design a Stack With Increment Operation
+// 1456. Maximum Number of Vowels in a Substring of Given Length
+bool isVowel(char ch) {
+    return (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u');
+}
 
+int maxVowels(string s, int k) {
+    int res = 0;
+    for (int i = 0; i < k; i++) {
+        res += isVowel(s[i]);
+    }
+    int count = res;
+    for (int i = k; i < s.length(); i++) {
+        count += isVowel(s[i]);
+        count -= isVowel(s[i-k]);
+        if (count > res) {
+            res = count;
+        }
+    }
+    return res;
+}
 
 
 
